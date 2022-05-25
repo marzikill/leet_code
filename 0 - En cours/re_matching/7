@@ -1,0 +1,27 @@
+class Graphe:
+    def __init__(self, initial: int, adj: dict, finals: set[int]):
+        self.initial = initial
+        self.current = initial
+        self.adj = adj
+        self.finals = finals
+
+    def feed(self, c):
+        # print(self.current)
+        self.current = self.adj[self.current][c]
+
+    def is_final(self):
+        return self.current in self.finals
+
+
+A = Graphe(1,
+           {1: {'b': {1}, 'a': {2}},
+            2: {'a': {2}, 'b': {3}},
+            3: {'a': {2}, 'b': {4}},
+            4: {'a': {4}, 'b': {4}}},
+           {4})
+
+chaine = 'aaabbbaabbaabba'
+
+for c in chaine:
+    A.feed(c)
+print(A.is_final())
